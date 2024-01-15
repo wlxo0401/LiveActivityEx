@@ -6,30 +6,31 @@
 //
 
 import UIKit
-import ActivityKit
 
 class ViewController: UIViewController {
 
-    private var activity: Activity<MyLiveActivityAttributes>?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        self.onLiveActivity()
     }
 
-    func onLiveActivity() {
-        // 앱이 live activity사용 가능한지여부
-        guard ActivityAuthorizationInfo().areActivitiesEnabled else { return }
-        let attribute = MyLiveActivityAttributes(name: "NS")
-        // stateful한 값
-        let state = MyLiveActivityAttributes.ContentState(emoji: "😌")
-        do {
-            // live activity 시작
-            self.activity = try Activity.request(attributes: attribute, contentState: state)
-        } catch {
-            print(error)
+    @IBAction func startButtonAction(_ sender: Any) {
+        // 가능한 기기들만 실행
+        if #available(iOS 16.1, *) {
+            // 앱 종료할 때 같이 종료시키기 -> AppDelegate를 통해서
+            LiveActivityManager.shared.isTerminateWithApp = true
+            
+            // Live Activity 생성
+            LiveActivityManager.shared.onLiveActivity()
+        }
+    }
+    
+    @IBAction func endButtonAction(_ sender: Any) {
+        // 가능한 기기들만 실행
+        if #available(iOS 16.1, *) {
+            // Live Activity 생성
+            LiveActivityManager.shared.offLiveActivity()
         }
     }
 }

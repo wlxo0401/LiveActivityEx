@@ -31,6 +31,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
+    func applicationWillTerminate(_ application: UIApplication) {
+        print("호출1")
+        // 가능한 기기들만 실행
+        if #available(iOS 16.1, *) {
+            // Live Activity 종료
+            if LiveActivityManager.shared.isTerminateWithApp {
+                LiveActivityManager.shared.offLiveActivity()
+            }
+        }
+        
+        print("호출2")
+        sleep(3)
+    }
 
+    
 }
 

@@ -20,6 +20,7 @@ struct MyLiveActivityAttributes: ActivityAttributes {
     var totalNum = 100.0
 }
 
+@available(iOS 16.1, *)
 struct MyLiveActivityLiveActivity: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: MyLiveActivityAttributes.self) { context in

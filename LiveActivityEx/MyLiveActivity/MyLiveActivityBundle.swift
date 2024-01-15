@@ -8,6 +8,7 @@
 import WidgetKit
 import SwiftUI
 
+@available(iOS 16.1, *)
 @main
 struct MyLiveActivityBundle: WidgetBundle {
     var body: some Widget {
